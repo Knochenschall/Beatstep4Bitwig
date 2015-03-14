@@ -91,13 +91,16 @@ DeviceView.prototype.onGridNote = function (note, velocity)
                 return;
             if (this.isLayer)
             {
-                var dl = cd.getSelectedLayer ();
+                var dl = cd.getSelectedLayerOrDrumPad ();
                 if (dl != null)
                 {
-                    cd.enterLayer (dl.index);
-                    cd.selectFirstDeviceInLayer (dl.index);
+                    cd.enterLayerOrDrumPad (dl.index);
+                    cd.selectFirstDeviceInLayerOrDrumPad (dl.index);
                 }
             }
+            else if (dl == null)
+                cd.selectLayerOrDrumPad (0);
+            
             this.isLayer = !this.isLayer;
             break;
             
