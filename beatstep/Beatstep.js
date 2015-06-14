@@ -115,8 +115,6 @@ Beatstep.prototype.handleEvent = function (cc, value)
     if (view == null)
         return;
  
-    var event = this.isButton (cc) ? new ButtonEvent (this.buttonStates[cc]) : null;
-
     switch (cc)
     {
         case BEATSTEP_KNOB_1:

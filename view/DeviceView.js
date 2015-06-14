@@ -89,9 +89,9 @@ DeviceView.prototype.onGridNote = function (note, velocity)
         case 3:
             if (!cd.hasLayers ())
                 return;
+            var dl = cd.getSelectedLayerOrDrumPad ();
             if (this.isLayer)
             {
-                var dl = cd.getSelectedLayerOrDrumPad ();
                 if (dl != null)
                 {
                     cd.enterLayerOrDrumPad (dl.index);
