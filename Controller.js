@@ -1,5 +1,5 @@
 // Written by Jürgen Moßgraber - mossgrabers.de
-// (c) 2014
+// (c) 2014-2015
 // Licensed under LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.txt
 
 function Controller ()
@@ -10,7 +10,7 @@ function Controller ()
     var input = new BeatstepMidiInput ();
 
     this.scales = new Scales (36, 52, 8, 2);
-    this.model = new Model (0, this.scales);
+    this.model = new Model (0, this.scales, 8, 8, 6, 6, 16, 16, true);
     
     this.surface = new Beatstep (output, input);
     
@@ -46,8 +46,12 @@ function Controller ()
     this.surface.addView (VIEW_DRUM, new DrumView (this.model));
     this.surface.addView (VIEW_SEQUENCER, new SequencerView (this.model));
     this.surface.addView (VIEW_SESSION, new SessionView (this.model));
+    this.surface.addView (VIEW_BROWSER, new BrowserView (this.model));
     
     this.surface.setActiveView (VIEW_TRACK);
+    
+    // Enable Shift button to send Midi Note 07
+    this.surface.output.sendSysex ("F0 00 20 6B 7F 42 02 00 01 5E 09 F7");
 }
 Controller.prototype = new AbstractController ();
 

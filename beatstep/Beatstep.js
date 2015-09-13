@@ -1,5 +1,5 @@
 // Written by Jürgen Moßgraber - mossgrabers.de
-// (c) 2014
+// (c) 2014-2015
 // Licensed under LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.txt
 
 var BEATSTEP_BUTTON_STATE_INVALID = -1;
@@ -63,6 +63,7 @@ function Beatstep (output, input)
         this.gridNotes.push (i);
     
     this.isTransportActive = true;
+    this.isShift = false;
     
     this.pads = new Grid (output);
 }
@@ -77,6 +78,15 @@ Beatstep.prototype.handleGridNote = function (note, velocity)
     
     // Force a redraw on button up because the light was also modified on the controller
     scheduleTask (doObject (this, function () { this.pads.invalidate (note - 36); }), null, 100);   
+};
+
+Beatstep.prototype.handleTouch = function (knob, value)
+{
+    if (knob == 7)
+    {
+        this.isShift = value == 127;
+        return;
+    }
 };
 
 Beatstep.prototype.setButton = function (button, state)
@@ -96,7 +106,7 @@ Beatstep.prototype.isSelectPressed = function ()
 
 Beatstep.prototype.isShiftPressed = function ()
 {
-    return false;
+    return this.isShift;
 };
 
 // Note: Weird to send to the DAW via Beatstep...

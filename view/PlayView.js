@@ -1,5 +1,5 @@
 // Written by Jürgen Moßgraber - mossgrabers.de
-// (c) 2014
+// (c) 2014-2015
 // Licensed under LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.txt
 
 function PlayView (model)
@@ -85,6 +85,12 @@ PlayView.prototype.onKnob = function (index, value)
 
 PlayView.prototype.onGridNote = function (note, velocity)
 {
+    if (this.surface.isShiftPressed ())
+    {
+        this.onShiftMode (note, velocity);
+        return;
+    }
+    
     if (!this.canSelectedTrackHoldNotes ())
         return;
 
@@ -111,6 +117,12 @@ PlayView.prototype.updateNoteMapping = function ()
 
 PlayView.prototype.drawGrid = function ()
 {
+    if (this.surface.isShiftPressed ())
+    {
+        this.drawShiftMode ();
+        return;
+    }
+    
     var isKeyboardEnabled = this.canSelectedTrackHoldNotes ();
     for (var i = 36; i < 52; i++)
     {

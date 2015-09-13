@@ -1,5 +1,5 @@
 // Written by Jürgen Moßgraber - mossgrabers.de
-// (c) 2014
+// (c) 2014-2015
 // Licensed under LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.txt
 
 function TrackView (model)
@@ -48,6 +48,12 @@ TrackView.prototype.onKnob = function (index, value)
 
 TrackView.prototype.onGridNote = function (note, velocity)
 {
+    if (this.surface.isShiftPressed ())
+    {
+        this.onShiftMode (note, velocity);
+        return;
+    }
+    
     if (velocity == 0)
         return;
         
@@ -110,6 +116,12 @@ TrackView.prototype.onGridNote = function (note, velocity)
 
 TrackView.prototype.drawGrid = function ()
 {
+    if (this.surface.isShiftPressed ())
+    {
+        this.drawShiftMode ();
+        return;
+    }
+    
     var tb = this.model.getCurrentTrackBank ();
     for (var i = 0; i < 8; i++)
         this.surface.pads.light (8 + i, tb.getTrack (i).selected ? BEATSTEP_BUTTON_STATE_BLUE : BEATSTEP_BUTTON_STATE_OFF);

@@ -1,5 +1,5 @@
 // Written by Jürgen Moßgraber - mossgrabers.de
-// (c) 2014
+// (c) 2014-2015
 // Licensed under LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.txt
 
 function SessionView (model)
@@ -30,6 +30,12 @@ SessionView.prototype.onKnob = function (index, value)
 
 SessionView.prototype.onGridNote = function (note, velocity)
 {
+    if (this.surface.isShiftPressed ())
+    {
+        this.onShiftMode (note, velocity);
+        return;
+    }
+    
     if (velocity == 0)
         return;
     
@@ -68,6 +74,12 @@ SessionView.prototype.onGridNote = function (note, velocity)
 
 SessionView.prototype.drawGrid = function ()
 {
+    if (this.surface.isShiftPressed ())
+    {
+        this.drawShiftMode ();
+        return;
+    }
+    
     for (var i = 0; i < 6; i++)
         this.surface.pads.light (i, BEATSTEP_BUTTON_STATE_OFF);
     for (var i = 6; i < 8; i++)

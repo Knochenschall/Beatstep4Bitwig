@@ -1,5 +1,5 @@
 // Written by Jürgen Moßgraber - mossgrabers.de
-// (c) 2014
+// (c) 2014-2015
 // Licensed under LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.txt
 
 SequencerView.NUM_DISPLAY_COLS = 16;
@@ -88,6 +88,12 @@ SequencerView.prototype.onKnob = function (index, value)
 
 SequencerView.prototype.onGridNote = function (note, velocity)
 {
+    if (this.surface.isShiftPressed ())
+    {
+        this.onShiftMode (note, velocity);
+        return;
+    }
+    
     if (!this.canSelectedTrackHoldNotes ())
         return;
 
@@ -119,6 +125,12 @@ SequencerView.prototype.updateNoteMapping = function ()
 
 SequencerView.prototype.drawGrid = function ()
 {
+    if (this.surface.isShiftPressed ())
+    {
+        this.drawShiftMode ();
+        return;
+    }
+    
     if (!this.canSelectedTrackHoldNotes ())
     {
         this.surface.pads.turnOff ();
