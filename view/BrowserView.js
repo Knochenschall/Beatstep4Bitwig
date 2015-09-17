@@ -76,13 +76,13 @@ BrowserView.prototype.onGridNote = function (note, velocity)
         // Cancel
         case 0:
             this.model.getBrowser ().stopBrowsing (false);
-            this.surface.setPendingMode (this.surface.getPreviousMode ());
+            this.surface.restoreView ();
             break;
             
         // OK
         case 7:
             this.model.getBrowser ().stopBrowsing (true);
-            this.surface.setPendingMode (this.surface.getPreviousMode ());
+            this.surface.restoreView ();
             break;
             
         // Not used
