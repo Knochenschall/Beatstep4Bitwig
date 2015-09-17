@@ -27,6 +27,13 @@ Grid.prototype.invalidate = function (index)
     this.currentButtonColors[index] = BEATSTEP_BUTTON_STATE_INVALID;
 };
 
+// Forces redraw of all grid buttons
+Grid.prototype.invalidateAll = function (index)
+{
+    for (var i = 0; i < 16; i++)
+        this.invalidate (i);
+};
+
 Grid.prototype.flush = function ()
 {
     for (var i = 0; i < this.arraySize; i++)

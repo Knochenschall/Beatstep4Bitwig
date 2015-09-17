@@ -40,12 +40,7 @@ AbstractView.prototype.onShiftMode = function (index, value)
 AbstractView.prototype.drawShiftMode = function ()
 {
     for (var i = 0; i < 8; i++)
-    {
         this.surface.pads.light (i, BEATSTEP_BUTTON_STATE_OFF);
-        // Force a redraw on button up because the light was also modified on the controller
-        this.surface.pads.invalidate (i);
-        this.surface.pads.invalidate (8 + i);
-    }
     this.surface.pads.light (7, BEATSTEP_BUTTON_STATE_PINK);
     this.surface.pads.light (8, BEATSTEP_BUTTON_STATE_RED);
     this.surface.pads.light (9, BEATSTEP_BUTTON_STATE_RED);

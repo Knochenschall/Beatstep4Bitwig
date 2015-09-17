@@ -85,6 +85,8 @@ Beatstep.prototype.handleTouch = function (knob, value)
     if (knob == 7)
     {
         this.isShift = value == 127;
+        // Full redraw required before and after Shift Mode
+        this.pads.invalidateAll ();
         return;
     }
 };
