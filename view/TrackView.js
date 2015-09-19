@@ -57,40 +57,57 @@ TrackView.prototype.onGridNote = function (note, velocity)
     if (velocity == 0)
         return;
         
+    var tb = this.model.getCurrentTrackBank ();
+    
     switch (note - 36)
     {
-        // Play
+        // Toggle Activate
         case 0:
-            if (!this.restartFlag)
-            {
-                this.model.getTransport ().play ();
-                this.doubleClickTest ();
-            }
-            else
-            {
-                this.model.getTransport ().stopAndRewind ();
-                this.restartFlag = false;
-            }
+            var selectedTrack = tb.getSelectedTrack ();
+            if (selectedTrack != null)
+                tb.toggleIsActivated (selectedTrack.index);
             break;
             
-        // Record
+        // Track left
         case 1:
-            this.model.getTransport ().record ();
+            var sel = tb.getSelectedTrack ();
+            var index = sel == null ? 0 : sel.index - 1;
+            if (index == -1 || this.surface.isShiftPressed ())
+            {
+                if (!tb.canScrollTracksUp ())
+                    return;
+                tb.scrollTracksPageUp ();
+                var newSel = index == -1 || sel == null ? 7 : sel.index;
+                scheduleTask (doObject (this, this.selectTrack), [ newSel ], 75);
+                return;
+            }
+            this.selectTrack (index);
             break;
             
-        // Repeat
+        // Track right
         case 2:
-            this.model.getTransport ().toggleLoop ();
+            var sel = tb.getSelectedTrack ();
+            var index = sel == null ? 0 : sel.index + 1;
+            if (index == 8 || this.surface.isShiftPressed ())
+            {
+                if (!tb.canScrollTracksDown ())
+                    return;
+                tb.scrollTracksPageDown ();
+                var newSel = index == 8 || sel == null ? 0 : sel.index;
+                scheduleTask (doObject (this, this.selectTrack), [ newSel ], 75);
+                return;
+            }
+            this.selectTrack (index);
             break;
             
-        // Click
+        // Move down
         case 3:
-            this.model.getTransport ().toggleClick ();
+            tb.selectChildren ();
             break;
             
-        // Tap Tempo
+        // Move up
         case 4:
-            this.model.getTransport ().tapTempo ();
+            tb.selectParent ();
             break;
             
         // Unused
@@ -99,17 +116,17 @@ TrackView.prototype.onGridNote = function (note, velocity)
             
         // Track Page down
         case 6:
-            this.model.getCurrentTrackBank ().scrollTracksPageUp ();
+            tb.scrollTracksPageUp ();
             break;
             
         // Track Page up
         case 7:
-            this.model.getCurrentTrackBank ().scrollTracksPageDown ();
+            tb.scrollTracksPageDown ();
             break;
             
         default:
             var track = note - 36 - 8;
-            this.model.getCurrentTrackBank ().select (track);
+            tb.select (track);
             break;
     }
 };
@@ -125,12 +142,13 @@ TrackView.prototype.drawGrid = function ()
     var tb = this.model.getCurrentTrackBank ();
     for (var i = 0; i < 8; i++)
         this.surface.pads.light (8 + i, tb.getTrack (i).selected ? BEATSTEP_BUTTON_STATE_BLUE : BEATSTEP_BUTTON_STATE_OFF);
-    var t = this.model.getTransport ();
-    this.surface.pads.light (0, t.isPlaying ? BEATSTEP_BUTTON_STATE_PINK : BEATSTEP_BUTTON_STATE_BLUE);
-    this.surface.pads.light (1, t.isRecording ? BEATSTEP_BUTTON_STATE_PINK : BEATSTEP_BUTTON_STATE_RED);
-    this.surface.pads.light (2, t.isLooping ? BEATSTEP_BUTTON_STATE_PINK : BEATSTEP_BUTTON_STATE_OFF);
-    this.surface.pads.light (3, t.isClickOn ? BEATSTEP_BUTTON_STATE_PINK : BEATSTEP_BUTTON_STATE_OFF);
-    this.surface.pads.light (4, BEATSTEP_BUTTON_STATE_OFF);
+    
+    var sel = tb.getSelectedTrack ();
+    this.surface.pads.light (0, sel != null && sel.activated ? BEATSTEP_BUTTON_STATE_RED : BEATSTEP_BUTTON_STATE_OFF);
+    this.surface.pads.light (1, BEATSTEP_BUTTON_STATE_BLUE);
+    this.surface.pads.light (2, BEATSTEP_BUTTON_STATE_BLUE);
+    this.surface.pads.light (3, BEATSTEP_BUTTON_STATE_RED);
+    this.surface.pads.light (4, BEATSTEP_BUTTON_STATE_RED);
     this.surface.pads.light (5, BEATSTEP_BUTTON_STATE_OFF);
     this.surface.pads.light (6, BEATSTEP_BUTTON_STATE_BLUE);
     this.surface.pads.light (7, BEATSTEP_BUTTON_STATE_BLUE);

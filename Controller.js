@@ -10,7 +10,7 @@ function Controller ()
     var input = new BeatstepMidiInput ();
 
     this.scales = new Scales (36, 52, 8, 2);
-    this.model = new Model (0, this.scales, 8, 8, 6, 6, 16, 16, true);
+    this.model = new Model (0, this.scales, 8, 8, 6, 6, 16, 16, false);
     
     this.surface = new Beatstep (output, input);
     
