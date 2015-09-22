@@ -21,7 +21,7 @@ createDeviceDiscoveryPairs ("Arturia Beatstep");
 
 function init ()
 {
-    controller = new Controller ("Beatstep");
+    controller = new Controller (false);
     println ("Initialized.");
 }
 

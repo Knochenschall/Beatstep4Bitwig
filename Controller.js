@@ -2,12 +2,12 @@
 // (c) 2014-2015
 // Licensed under LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.txt
 
-function Controller (controllerName)
+function Controller (isPro)
 {
     Config.init ();
 
     var output = new MidiOutput ();
-    var input = new BeatstepMidiInput (controllerName);
+    var input = new BeatstepMidiInput (isPro);
 
     this.scales = new Scales (36, 52, 8, 2);
     this.model = new Model (0, this.scales, 8, 8, 6, 6, 16, 16, false);
