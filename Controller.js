@@ -99,6 +99,8 @@ function changeValue (control, value, fractionValue, maxParameterValue, minParam
     if (typeof (minParameterValue) == 'undefined')
         minParameterValue = 0;
     var isInc = control >= 65;
+    if (control == 64)
+        return value;
     var speed = Math.max ((isInc ? control - 65 : Math.abs (63 - control)) * fractionValue, fractionValue);
     return isInc ? Math.min (value + speed, maxParameterValue - 1) : Math.max (value - speed, minParameterValue);
 }

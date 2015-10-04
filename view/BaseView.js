@@ -39,7 +39,7 @@ BaseView.prototype.onTrackKnob = function (index, value)
             break;
             
         case 4:
-            tb.setCrossfadeModeAsNumber (selectedTrack.index, changeValue (value, tb.getCrossfadeModeAsNumber (selectedTrack.index), 1, 2));
+            tb.setCrossfadeModeAsNumber (selectedTrack.index, changeValue (value, tb.getCrossfadeModeAsNumber (selectedTrack.index), 1, 3));
             break;
             
         case 5:
