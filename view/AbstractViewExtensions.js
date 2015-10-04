@@ -18,3 +18,10 @@ AbstractView.prototype.switchToBrowseView = function ()
     if (this.model.getBrowser ().getPresetSession ().isActive)
         this.surface.setActiveView (VIEW_BROWSER);
 };
+
+AbstractView.prototype.onStep = function (step, value)
+{        
+    println(step);
+    
+    ShiftView.prototype.onGridNote.call (this, 36 + step, value);
+};

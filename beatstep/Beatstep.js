@@ -13,23 +13,40 @@ Scales.SCALE_COLOR_OCTAVE       = BEATSTEP_BUTTON_STATE_RED;
 Scales.SCALE_COLOR_NOTE         = BEATSTEP_BUTTON_STATE_BLUE;
 Scales.SCALE_COLOR_OUT_OF_SCALE = BEATSTEP_BUTTON_STATE_OFF;
 
-var BEATSTEP_KNOB_1    = 20;
-var BEATSTEP_KNOB_2    = 21;
-var BEATSTEP_KNOB_3    = 22;
-var BEATSTEP_KNOB_4    = 23;
-var BEATSTEP_KNOB_5    = 24;
-var BEATSTEP_KNOB_6    = 25;
-var BEATSTEP_KNOB_7    = 26;
-var BEATSTEP_KNOB_8    = 27;
-var BEATSTEP_KNOB_9    = 30;
-var BEATSTEP_KNOB_10   = 31;
-var BEATSTEP_KNOB_11   = 32;
-var BEATSTEP_KNOB_12   = 33;
-var BEATSTEP_KNOB_13   = 34;
-var BEATSTEP_KNOB_14   = 35;
-var BEATSTEP_KNOB_15   = 36;
-var BEATSTEP_KNOB_16   = 37;
-var BEATSTEP_KNOB_MAIN = 40;
+var BEATSTEP_KNOB_1     = 20;
+var BEATSTEP_KNOB_2     = 21;
+var BEATSTEP_KNOB_3     = 22;
+var BEATSTEP_KNOB_4     = 23;
+var BEATSTEP_KNOB_5     = 24;
+var BEATSTEP_KNOB_6     = 25;
+var BEATSTEP_KNOB_7     = 26;
+var BEATSTEP_KNOB_8     = 27;
+var BEATSTEP_KNOB_9     = 30;
+var BEATSTEP_KNOB_10    = 31;
+var BEATSTEP_KNOB_11    = 32;
+var BEATSTEP_KNOB_12    = 33;
+var BEATSTEP_KNOB_13    = 34;
+var BEATSTEP_KNOB_14    = 35;
+var BEATSTEP_KNOB_15    = 36;
+var BEATSTEP_KNOB_16    = 37;
+var BEATSTEP_KNOB_MAIN  = 40;
+                        
+var BEATSTEP_PRO_STEP1  = 50;
+var BEATSTEP_PRO_STEP2  = 51;
+var BEATSTEP_PRO_STEP3  = 52;
+var BEATSTEP_PRO_STEP4  = 53;
+var BEATSTEP_PRO_STEP5  = 54;
+var BEATSTEP_PRO_STEP6  = 55;
+var BEATSTEP_PRO_STEP7  = 56;
+var BEATSTEP_PRO_STEP8  = 57;
+var BEATSTEP_PRO_STEP9  = 58;
+var BEATSTEP_PRO_STEP10 = 59;
+var BEATSTEP_PRO_STEP11 = 60;
+var BEATSTEP_PRO_STEP12 = 61;
+var BEATSTEP_PRO_STEP13 = 62;
+var BEATSTEP_PRO_STEP14 = 63;
+var BEATSTEP_PRO_STEP15 = 64;
+var BEATSTEP_PRO_STEP16 = 65;
 
 var BEATSTEP_PAD_1  = 0x70;
 var BEATSTEP_PAD_2  = 0x71;
@@ -157,6 +174,25 @@ Beatstep.prototype.handleEvent = function (cc, value)
             
         case BEATSTEP_KNOB_MAIN:
             view.onMainKnob (value);
+            break;
+            
+        case BEATSTEP_PRO_STEP1:
+        case BEATSTEP_PRO_STEP2:
+        case BEATSTEP_PRO_STEP3:
+        case BEATSTEP_PRO_STEP4:
+        case BEATSTEP_PRO_STEP5:
+        case BEATSTEP_PRO_STEP6:
+        case BEATSTEP_PRO_STEP7:
+        case BEATSTEP_PRO_STEP8:
+        case BEATSTEP_PRO_STEP9:
+        case BEATSTEP_PRO_STEP10:
+        case BEATSTEP_PRO_STEP11:
+        case BEATSTEP_PRO_STEP12:
+        case BEATSTEP_PRO_STEP13:
+        case BEATSTEP_PRO_STEP14:
+        case BEATSTEP_PRO_STEP15:
+        case BEATSTEP_PRO_STEP16:
+            view.onStep (cc - BEATSTEP_PRO_STEP1, value);
             break;
             
         default:

@@ -16,6 +16,9 @@ BaseView.prototype.updateNoteMapping = function ()
 
 BaseView.prototype.onTrackKnob = function (index, value)
 {
+    if (value == 64)
+        return;
+    
     var tb = this.model.getCurrentTrackBank ();
     var selectedTrack = tb.getSelectedTrack ();
     if (selectedTrack == null)
