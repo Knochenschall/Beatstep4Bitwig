@@ -30,12 +30,6 @@ SessionView.prototype.onKnob = function (index, value)
 
 SessionView.prototype.onGridNote = function (note, velocity)
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.onShiftMode (note, velocity);
-        return;
-    }
-    
     if (velocity == 0)
         return;
     
@@ -74,12 +68,6 @@ SessionView.prototype.onGridNote = function (note, velocity)
 
 SessionView.prototype.drawGrid = function ()
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.drawShiftMode ();
-        return;
-    }
-    
     for (var i = 0; i < 6; i++)
         this.surface.pads.light (i, BEATSTEP_BUTTON_STATE_OFF);
     for (var i = 6; i < 8; i++)

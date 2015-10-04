@@ -83,12 +83,6 @@ DrumView.prototype.onKnob = function (index, value)
 
 DrumView.prototype.onGridNote = function (note, velocity)
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.onShiftMode (note, velocity);
-        return;
-    }
-    
     if (!this.canSelectedTrackHoldNotes ())
         return;
 
@@ -116,12 +110,6 @@ DrumView.prototype.updateNoteMapping = function ()
 
 DrumView.prototype.drawGrid = function ()
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.drawShiftMode ();
-        return;
-    }
-    
     if (!this.canSelectedTrackHoldNotes ())
     {
         this.surface.pads.turnOff ();

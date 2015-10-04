@@ -82,12 +82,16 @@ Beatstep.prototype.handleGridNote = function (note, velocity)
 
 Beatstep.prototype.handleTouch = function (knob, value)
 {
+    // Shift button pressed
     if (knob == 7)
     {
         this.isShift = value == 127;
-        // Full redraw required before and after Shift Mode
-        this.pads.invalidateAll ();
-        return;
+        if (this.isShift)
+            this.setActiveView (VIEW_SHIFT);
+        else if (this.isActiveView (VIEW_SHIFT))
+            this.restoreView ();
+        else
+            this.pads.redraw ();
     }
 };
 

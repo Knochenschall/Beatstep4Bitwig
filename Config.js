@@ -18,10 +18,12 @@ Config.maxParameterValue = 128;
 Config.SCALES_SCALE  = 0;
 Config.SCALES_BASE   = 1;
 Config.SCALES_IN_KEY = 2;
+Config.SCALES_LAYOUT = 3;
 
-Config.scale      = 'Major';
-Config.scaleBase  = 'C';
-Config.scaleInKey = true;
+Config.scale       = 'Major';
+Config.scaleBase   = 'C';
+Config.scaleInKey  = true;
+Config.scaleLayout = '4th ^';
 
 Config.init = function ()
 {
@@ -51,6 +53,13 @@ Config.init = function ()
         Config.scaleInKey = value == "In Key";
         Config.notifyListeners (Config.SCALES_IN_KEY);
     });
+
+    Config.scaleLayoutSetting = prefs.getEnumSetting ("Layout", "Scales", Scales.LAYOUT_NAMES, Scales.LAYOUT_NAMES[0]);
+    Config.scaleLayoutSetting.addValueObserver (function (value)
+    {
+        Config.scaleLayout = value;
+        Config.notifyListeners (Config.SCALES_LAYOUT);
+    });
 };
 
 Config.setScale = function (scale)
@@ -68,12 +77,17 @@ Config.setScaleInScale = function (inScale)
     Config.scaleInScaleSetting.set (inScale ? "In Key" : "Chromatic");
 };
 
+Config.setScaleLayout = function (scaleLayout)
+{
+    Config.scaleLayoutSetting.set (scaleLayout);
+};
+
 // ------------------------------
 // Property listeners
 // ------------------------------
 
 Config.listeners = [];
-for (var i = 0; i <= Config.SCALES_IN_KEY; i++)
+for (var i = 0; i <= Config.SCALES_LAYOUT; i++)
     Config.listeners[i] = [];
 
 Config.addPropertyListener = function (property, listener)

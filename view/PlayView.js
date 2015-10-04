@@ -24,6 +24,8 @@ function PlayView (model)
     {
         this.clearPressedKeys ();
     }));
+    
+    this.isMacrosActive = false;
 }
 PlayView.prototype = new BaseView ();
 
@@ -33,6 +35,14 @@ PlayView.prototype = new BaseView ();
 
 PlayView.prototype.onKnob = function (index, value)
 {
+    if (this.isMacrosActive && index < 8)
+    {
+        var cd = this.model.getCursorDevice ();
+        var v = this.surface.changeValue (value, cd.getMacroParam (index).value);
+        cd.getMacro (index).getAmount ().set (v, Config.maxParameterValue);
+        return;
+    }
+    
     if (index < 12)
     {
         this.onTrackKnob (index, value);
@@ -85,12 +95,6 @@ PlayView.prototype.onKnob = function (index, value)
 
 PlayView.prototype.onGridNote = function (note, velocity)
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.onShiftMode (note, velocity);
-        return;
-    }
-    
     if (!this.canSelectedTrackHoldNotes ())
         return;
 
@@ -117,12 +121,6 @@ PlayView.prototype.updateNoteMapping = function ()
 
 PlayView.prototype.drawGrid = function ()
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.drawShiftMode ();
-        return;
-    }
-    
     var isKeyboardEnabled = this.canSelectedTrackHoldNotes ();
     for (var i = 36; i < 52; i++)
     {

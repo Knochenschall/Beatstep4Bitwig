@@ -16,6 +16,11 @@ function Controller (isPro)
     
     this.surface.addViewChangeListener (doObject (this, function (prevViewID, viewID)
     {
+        this.surface.pads.redraw ();
+    }));
+    
+    this.surface.addViewChangeListener (doObject (this, function (prevViewID, viewID)
+    {
         this.updateIndication (viewID);
     }));
     Config.addPropertyListener (Config.SCALES_SCALE, doObject (this, function ()
@@ -39,6 +44,13 @@ function Controller (isPro)
         if (view != null)
             view.updateNoteMapping ();
     }));
+    Config.addPropertyListener (Config.SCALES_LAYOUT, doObject (this, function ()
+    {
+        this.scales.setScaleLayoutByName (Config.scaleLayout);
+        var view = this.surface.getActiveView ();
+        if (view != null)
+            view.updateNoteMapping ();
+    }));
 
     this.surface.addView (VIEW_TRACK, new TrackView (this.model));
     this.surface.addView (VIEW_DEVICE, new DeviceView (this.model));
@@ -47,6 +59,7 @@ function Controller (isPro)
     this.surface.addView (VIEW_SEQUENCER, new SequencerView (this.model));
     this.surface.addView (VIEW_SESSION, new SessionView (this.model));
     this.surface.addView (VIEW_BROWSER, new BrowserView (this.model));
+    this.surface.addView (VIEW_SHIFT, new ShiftView (this.model));
     
     this.surface.setActiveView (VIEW_TRACK);
     

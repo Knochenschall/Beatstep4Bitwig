@@ -22,6 +22,12 @@ DeviceView.prototype.onKnob = function (index, value)
     var cd = this.model.getCursorDevice ();
     if (index < 8)
     {
+        var v = this.surface.changeValue (value, cd.getMacroParam (index).value);
+        cd.getMacro (index).getAmount ().set (v, Config.maxParameterValue);
+    }
+    else
+    {
+        index = index - 8;
         if (this.editDirectParameters)
         {
             var params = cd.getDirectParameters ();
@@ -36,22 +42,10 @@ DeviceView.prototype.onKnob = function (index, value)
             cd.setParameter (index, param.value);
         }
     }
-    else
-    {
-        index = index - 8;
-        var v = this.surface.changeValue (value, cd.getMacroParam (index).value);
-        cd.getMacro (index).getAmount ().set (v, Config.maxParameterValue);
-    }
 };
 
 DeviceView.prototype.onGridNote = function (note, velocity)
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.onShiftMode (note, velocity);
-        return;
-    }
-    
     if (velocity == 0)
         return;
         
@@ -166,12 +160,6 @@ DeviceView.prototype.onGridNote = function (note, velocity)
 
 DeviceView.prototype.drawGrid = function ()
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.drawShiftMode ();
-        return;
-    }
-    
     var cd = this.model.getCursorDevice ();
     var offset = Math.floor (cd.getSelectedParameterPage () / 8) * 8;
     for (var i = 0; i < 8; i++)

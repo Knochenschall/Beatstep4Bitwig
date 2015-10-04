@@ -48,12 +48,6 @@ TrackView.prototype.onKnob = function (index, value)
 
 TrackView.prototype.onGridNote = function (note, velocity)
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.onShiftMode (note, velocity);
-        return;
-    }
-    
     if (velocity == 0)
         return;
         
@@ -133,12 +127,6 @@ TrackView.prototype.onGridNote = function (note, velocity)
 
 TrackView.prototype.drawGrid = function ()
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.drawShiftMode ();
-        return;
-    }
-    
     var tb = this.model.getCurrentTrackBank ();
     for (var i = 0; i < 8; i++)
         this.surface.pads.light (8 + i, tb.getTrack (i).selected ? BEATSTEP_BUTTON_STATE_BLUE : BEATSTEP_BUTTON_STATE_OFF);

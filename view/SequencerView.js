@@ -88,12 +88,6 @@ SequencerView.prototype.onKnob = function (index, value)
 
 SequencerView.prototype.onGridNote = function (note, velocity)
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.onShiftMode (note, velocity);
-        return;
-    }
-    
     if (!this.canSelectedTrackHoldNotes ())
         return;
 
@@ -125,12 +119,6 @@ SequencerView.prototype.updateNoteMapping = function ()
 
 SequencerView.prototype.drawGrid = function ()
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.drawShiftMode ();
-        return;
-    }
-    
     if (!this.canSelectedTrackHoldNotes ())
     {
         this.surface.pads.turnOff ();

@@ -9,6 +9,7 @@ var VIEW_DRUM      = 3;
 var VIEW_SEQUENCER = 4; 
 var VIEW_SESSION   = 5;
 var VIEW_BROWSER   = 6;
+var VIEW_SHIFT     = 7;
 
 load ("BaseView.js");
 load ("TrackView.js");
@@ -20,3 +21,4 @@ load ("SequencerView.js");
 load ("SessionView.js");
 load ("AbstractViewExtensions.js");
 load ("BrowserView.js");
+load ("ShiftView.js");

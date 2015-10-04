@@ -28,7 +28,7 @@ Grid.prototype.invalidate = function (index)
 };
 
 // Forces redraw of all grid buttons
-Grid.prototype.invalidateAll = function (index)
+Grid.prototype.redraw = function (index)
 {
     for (var i = 0; i < 16; i++)
         this.invalidate (i);

@@ -62,12 +62,6 @@ BrowserView.prototype.onKnob = function (index, value)
 
 BrowserView.prototype.onGridNote = function (note, velocity)
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.onShiftMode (note, velocity);
-        return;
-    }
-    
     if (velocity == 0)
         return;
         
@@ -93,12 +87,6 @@ BrowserView.prototype.onGridNote = function (note, velocity)
 
 BrowserView.prototype.drawGrid = function ()
 {
-    if (this.surface.isShiftPressed ())
-    {
-        this.drawShiftMode ();
-        return;
-    }
-    
     for (var i = 0; i < 16; i++)
         this.surface.pads.light (i, BEATSTEP_BUTTON_STATE_OFF);
     this.surface.pads.light (0, BEATSTEP_BUTTON_STATE_RED);
