@@ -10,6 +10,8 @@ function Controller (isPro)
     Config.init ();
 
     var output = new MidiOutput ();
+    output.setShouldSendMidiBeatClock (true);
+    
     var input = new BeatstepMidiInput (isPro);
 
     this.scales = new Scales (36, 52, 8, 2);
