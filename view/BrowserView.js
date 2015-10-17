@@ -62,21 +62,48 @@ BrowserView.prototype.onKnob = function (index, value)
 
 BrowserView.prototype.onGridNote = function (note, velocity)
 {
-    if (velocity == 0)
-        return;
-        
     switch (note - 36)
     {
         // Cancel
         case 0:
+            if (velocity == 0)
+                return;
             this.model.getBrowser ().stopBrowsing (false);
             this.surface.restoreView ();
             break;
             
         // OK
         case 7:
+            if (velocity == 0)
+                return;
             this.model.getBrowser ().stopBrowsing (true);
             this.surface.restoreView ();
+            break;
+
+        // Notes for preview
+        case 2:
+            this.surface.noteInput.sendRawMidiEvent (0x90, 12, velocity);
+            break;
+        case 3:
+            this.surface.noteInput.sendRawMidiEvent (0x90, 24, velocity);
+            break;
+        case 4:
+            this.surface.noteInput.sendRawMidiEvent (0x90, 36, velocity);
+            break;
+        case 5:
+            this.surface.noteInput.sendRawMidiEvent (0x90, 48, velocity);
+            break;
+        case 10:
+            this.surface.noteInput.sendRawMidiEvent (0x90, 60, velocity);
+            break;
+        case 11:
+            this.surface.noteInput.sendRawMidiEvent (0x90, 72, velocity);
+            break;
+        case 12:
+            this.surface.noteInput.sendRawMidiEvent (0x90, 84, velocity);
+            break;
+        case 13:
+            this.surface.noteInput.sendRawMidiEvent (0x90, 96, velocity);
             break;
             
         // Not used
@@ -87,8 +114,16 @@ BrowserView.prototype.onGridNote = function (note, velocity)
 
 BrowserView.prototype.drawGrid = function ()
 {
-    for (var i = 0; i < 16; i++)
-        this.surface.pads.light (i, BEATSTEP_BUTTON_STATE_OFF);
     this.surface.pads.light (0, BEATSTEP_BUTTON_STATE_RED);
+    this.surface.pads.light (1, BEATSTEP_BUTTON_STATE_OFF);
+    for (var i = 2; i < 6; i++)
+        this.surface.pads.light (i, BEATSTEP_BUTTON_STATE_PINK);
+    this.surface.pads.light (6, BEATSTEP_BUTTON_STATE_OFF);
     this.surface.pads.light (7, BEATSTEP_BUTTON_STATE_BLUE);
+    this.surface.pads.light (8, BEATSTEP_BUTTON_STATE_OFF);
+    this.surface.pads.light (9, BEATSTEP_BUTTON_STATE_OFF);
+    for (var i = 10; i < 14; i++)
+        this.surface.pads.light (i, BEATSTEP_BUTTON_STATE_PINK);
+    this.surface.pads.light (14, BEATSTEP_BUTTON_STATE_OFF);
+    this.surface.pads.light (15, BEATSTEP_BUTTON_STATE_OFF);
 };
