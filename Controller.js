@@ -14,8 +14,20 @@ function Controller (isPro)
     
     var input = new BeatstepMidiInput (isPro);
 
-    this.scales = new Scales (36, 52, 8, 2);
-    this.model = new Model (0, this.scales, 8, 8, 6, 6, 16, 16, false);
+    this.scales = new Scales (36,   // Start note 
+                              52,   // End note
+                              8,    // Number of columns
+                              2);   // Number of rows
+    
+    this.model = new Model (0,              // The MIDI CC at which the user parameters start
+                            this.scales,    // The scales object
+                            8,              // The number of track to monitor (per track bank)
+                            8,              // The number of scenes to monitor (per scene bank)
+                            6,              // The number of sends to monitor
+                            6,              // The number of filters columns in the browser to monitor
+                            16,             // The number of entries in one filter column to monitor
+                            16,             // The number of search results in the browser to monitor
+                            false);         // Don't navigate groups, all tracks are flat (if true)    
     
     this.surface = new Beatstep (output, input);
     
