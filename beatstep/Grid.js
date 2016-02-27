@@ -6,7 +6,10 @@ function Grid (output)
 {
     this.output = output;
 
-    this.arraySize = 2 * 8;
+    this.rows = 2;
+    this.columns = 8;
+    
+    this.arraySize = this.rows * this.columns;
     this.currentButtonColors = initArray (BEATSTEP_BUTTON_STATE_OFF, this.arraySize);
     this.buttonColors = initArray (BEATSTEP_BUTTON_STATE_OFF, this.arraySize);
 }
@@ -18,7 +21,7 @@ Grid.prototype.light = function (index, color)
 
 Grid.prototype.lightEx = function (x, y, color)
 {
-    this.buttonColors[x + 8 * y] = color;
+    this.buttonColors[x + this.columns * y] = color;
 };
 
 // Forces redraw of grid button
@@ -30,7 +33,7 @@ Grid.prototype.invalidate = function (index)
 // Forces redraw of all grid buttons
 Grid.prototype.redraw = function (index)
 {
-    for (var i = 0; i < 16; i++)
+    for (var i = 0; i < this.arraySize; i++)
         this.invalidate (i);
 };
 
@@ -54,6 +57,6 @@ Grid.prototype.turnOff = function ()
 
 Grid.prototype.setPadColor = function (index, color)
 {
-    var pad = index < 8 ? BEATSTEP_PAD_9 + index : BEATSTEP_PAD_1 + (index - 8);
+    var pad = index < this.columns ? BEATSTEP_PAD_9 + index : BEATSTEP_PAD_1 + (index - this.columns);
     this.output.sendSysex (Beatstep.SYSEX_HEADER + toHexStr ([pad, color]) + Beatstep.SYSEX_END);
 };
