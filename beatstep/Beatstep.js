@@ -86,6 +86,19 @@ function Beatstep (output, input)
 }
 Beatstep.prototype = new AbstractControlSurface ();
 
+Beatstep.prototype.handleMidi = function (status, data1, data2)
+{
+    // Filter all channels except the controller channel
+    if (controller.isPro)
+    {
+        var channel = status & 0xF;
+        if (channel != 2)
+            return;
+    }
+    
+    AbstractControlSurface.prototype.handleMidi.call (this, status, data1, data2);
+};
+
 Beatstep.prototype.handleGridNote = function (note, velocity)
 {
     AbstractControlSurface.prototype.handleGridNote.call (this, note, velocity);

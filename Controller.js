@@ -7,6 +7,8 @@ Scales.OCTAVE_RANGE = 7;
 
 function Controller (isPro)
 {
+    this.isPro = isPro;
+    
     Config.init ();
 
     var output = new MidiOutput ();
