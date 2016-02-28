@@ -34,10 +34,6 @@ function Controller (isPro)
     this.surface.addViewChangeListener (doObject (this, function (prevViewID, viewID)
     {
         this.surface.pads.redraw ();
-    }));
-    
-    this.surface.addViewChangeListener (doObject (this, function (prevViewID, viewID)
-    {
         this.updateIndication (viewID);
     }));
     Config.addPropertyListener (Config.SCALES_SCALE, doObject (this, function ()
