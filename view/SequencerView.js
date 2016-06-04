@@ -56,7 +56,7 @@ SequencerView.prototype.onKnob = function (index, value)
 
         case 13:
             this.changeResolution (value);
-            displayNotification (this.resolutionNames[this.selectedIndex]);
+            displayNotification (this.resolutionsStr[this.selectedIndex]);
             break;
 
         // Up/Down

@@ -1,18 +1,18 @@
 // Written by Jürgen Moßgraber - mossgrabers.de
-// (c) 2014-2015
+// (c) 2014-2016
 // Licensed under LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.txt
 
 function AbstractSequencerView (model, name, rows, cols)
 {
     if (!model) // Called on first prototype creation
         return;
-    
+
     BaseView.call (this, model, name);
 
     this.resolutions = [ 1, 2/3, 1/2, 1/3, 1/4, 1/6, 1/8, 1/12 ];
-    this.resolutionNames = [ '1/4', '1/4t', '1/8', '1/8t', '1/16', '1/16t', '1/32', '1/32t' ];
+    this.resolutionsStr = [ "1/4", "1/4t", "1/8", "1/8t", "1/16", "1/16t", "1/32", "1/32t" ];
     this.selectedIndex = 4;
-    this.scales = model.getScales ();
+    this.scales = this.model.getScales ();
 
     this.offsetX = 0;
     this.offsetY = 0;
