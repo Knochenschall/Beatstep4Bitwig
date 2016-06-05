@@ -88,7 +88,7 @@ SequencerView.prototype.onKnob = function (index, value)
 
 SequencerView.prototype.onGridNote = function (note, velocity)
 {
-    if (!this.canSelectedTrackHoldNotes ())
+    if (!this.model.canSelectedTrackHoldNotes ())
         return;
 
     var index = note - 36;
@@ -113,13 +113,13 @@ SequencerView.prototype.onGridNote = function (note, velocity)
 
 SequencerView.prototype.updateNoteMapping = function ()
 {
-    this.noteMap = this.canSelectedTrackHoldNotes () && this.isPlayMode ? this.scales.getNoteMatrix () : this.scales.getEmptyMatrix ();
+    this.noteMap = this.model.canSelectedTrackHoldNotes () && this.isPlayMode ? this.scales.getNoteMatrix () : this.scales.getEmptyMatrix ();
     this.surface.setKeyTranslationTable (this.noteMap);
 };
 
 SequencerView.prototype.drawGrid = function ()
 {
-    if (!this.canSelectedTrackHoldNotes ())
+    if (!this.model.canSelectedTrackHoldNotes ())
     {
         this.surface.pads.turnOff ();
         return;

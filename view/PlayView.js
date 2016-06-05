@@ -95,7 +95,7 @@ PlayView.prototype.onKnob = function (index, value)
 
 PlayView.prototype.onGridNote = function (note, velocity)
 {
-    if (!this.canSelectedTrackHoldNotes ())
+    if (!this.model.canSelectedTrackHoldNotes ())
         return;
 
     // Mark selected notes
@@ -114,14 +114,14 @@ PlayView.prototype.onPolyAftertouch = function (note, value)
 
 PlayView.prototype.updateNoteMapping = function ()
 {
-    this.noteMap = this.canSelectedTrackHoldNotes () ? this.scales.getNoteMatrix () : this.scales.getEmptyMatrix ();
+    this.noteMap = this.model.canSelectedTrackHoldNotes () ? this.scales.getNoteMatrix () : this.scales.getEmptyMatrix ();
     // Workaround: https://github.com/git-moss/Push4Bitwig/issues/7
     scheduleTask (doObject (this, function () { this.surface.setKeyTranslationTable (this.noteMap); }), null, 100);
 };
 
 PlayView.prototype.drawGrid = function ()
 {
-    var isKeyboardEnabled = this.canSelectedTrackHoldNotes ();
+    var isKeyboardEnabled = this.model.canSelectedTrackHoldNotes ();
     for (var i = 36; i < 52; i++)
     {
         this.surface.pads.light (i - 36, isKeyboardEnabled ? (this.pressedKeys[i] > 0 ?

@@ -83,7 +83,7 @@ DrumView.prototype.onKnob = function (index, value)
 
 DrumView.prototype.onGridNote = function (note, velocity)
 {
-    if (!this.canSelectedTrackHoldNotes ())
+    if (!this.model.canSelectedTrackHoldNotes ())
         return;
 
     var index = note - 36;
@@ -104,13 +104,13 @@ DrumView.prototype.onGridNote = function (note, velocity)
 
 DrumView.prototype.updateNoteMapping = function ()
 {
-    this.noteMap = this.canSelectedTrackHoldNotes () && this.isPlayMode ? this.scales.getDrumMatrix () : this.scales.getEmptyMatrix ();
+    this.noteMap = this.model.canSelectedTrackHoldNotes () && this.isPlayMode ? this.scales.getDrumMatrix () : this.scales.getEmptyMatrix ();
     this.surface.setKeyTranslationTable (this.noteMap);
 };
 
 DrumView.prototype.drawGrid = function ()
 {
-    if (!this.canSelectedTrackHoldNotes ())
+    if (!this.model.canSelectedTrackHoldNotes ())
     {
         this.surface.pads.turnOff ();
         return;
