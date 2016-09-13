@@ -4,7 +4,8 @@
 
 function PlayView (model)
 {
-    BaseView.call (this, model, "Play");
+    AbstractView.call (this, model);
+    this.name = "Play";
 
     this.scales = model.getScales ();
     this.noteMap = this.scales.getEmptyMatrix ();
@@ -27,7 +28,7 @@ function PlayView (model)
     
     this.isMacrosActive = false;
 }
-PlayView.prototype = new BaseView ();
+PlayView.prototype = new AbstractView ();
 
 //--------------------------------------
 // Knobs

@@ -6,7 +6,6 @@ function ShiftView (model)
 {
     if (model == null)
         return;
-    
     AbstractView.call (this, model);
 }
 ShiftView.prototype = new AbstractView ();

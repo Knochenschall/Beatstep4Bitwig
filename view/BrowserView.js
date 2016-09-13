@@ -6,9 +6,10 @@ BrowserView.COLUMN_ORDER = [ 1, 0, 4, 5, 2, 3 ];
 
 function BrowserView (model)
 {
-    BaseView.call (this, model, "Browser");
+    AbstractView.call (this, model);
+    this.name = "Browser";
 }
-BrowserView.prototype = new BaseView ();
+BrowserView.prototype = new AbstractView ();
 
 //--------------------------------------
 // Knobs

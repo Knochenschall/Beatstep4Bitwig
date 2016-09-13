@@ -6,7 +6,8 @@ DrumView.NUM_DISPLAY_COLS = 16;
 
 function DrumView (model)
 {
-    AbstractSequencerView.call (this, model, "Drum", 128, DrumView.NUM_DISPLAY_COLS);
+    BaseSequencerView.call (this, model, 128, DrumView.NUM_DISPLAY_COLS);
+    this.name = "Drum";
 
     this.offsetY = Scales.DRUM_NOTE_START;
     this.selectedPad = 0;
@@ -27,7 +28,7 @@ function DrumView (model)
         this.clearPressedKeys ();
     }));
 }
-DrumView.prototype = new AbstractSequencerView ();
+DrumView.prototype = new BaseSequencerView ();
 
 //--------------------------------------
 // Knobs

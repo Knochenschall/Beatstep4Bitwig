@@ -11,7 +11,6 @@ function DeviceView (model)
     this.isLayer = false;
 }
 DeviceView.prototype = new AbstractView ();
-DeviceView.prototype.constructor = DeviceView;
 
 //--------------------------------------
 // Knobs

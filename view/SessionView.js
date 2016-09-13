@@ -4,9 +4,10 @@
 
 function SessionView (model)
 {
-    BaseView.call (this, model, "Session");
+    AbstractView.call (this, model);
+    this.name = "Session";
 }
-SessionView.prototype = new BaseView ();
+SessionView.prototype = new AbstractView ();
 
 SessionView.prototype.onKnob = function (index, value)
 {

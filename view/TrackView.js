@@ -4,9 +4,10 @@
 
 function TrackView (model)
 {
-    BaseView.call (this, model, "Track");
+    AbstractView.call (this, model);
+    this.name = "Track";
 }
-TrackView.prototype = new BaseView ();
+TrackView.prototype = new AbstractView ();
 
 //--------------------------------------
 // Knobs

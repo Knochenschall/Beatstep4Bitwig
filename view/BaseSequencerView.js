@@ -2,27 +2,15 @@
 // (c) 2014-2016
 // Licensed under LGPLv3 - http://www.gnu.org/licenses/lgpl-3.0.txt
 
-function AbstractSequencerView (model, name, rows, cols)
+function BaseSequencerView (model, rows, cols)
 {
     if (!model) // Called on first prototype creation
         return;
-
-    BaseView.call (this, model, name);
-
-    this.resolutions = [ 1, 2/3, 1/2, 1/3, 1/4, 1/6, 1/8, 1/12 ];
-    this.resolutionsStr = [ "1/4", "1/4t", "1/8", "1/8t", "1/16", "1/16t", "1/32", "1/32t" ];
-    this.selectedIndex = 4;
-    this.scales = this.model.getScales ();
-
-    this.offsetX = 0;
-    this.offsetY = 0;
-
-    this.clip = this.model.createCursorClip (cols, rows);
-    this.clip.setStepLength (this.resolutions[this.selectedIndex]);
+    AbstractSequencerView.call (this, model, rows, cols);
 }
-AbstractSequencerView.prototype = new BaseView ();
+BaseSequencerView.prototype = new AbstractSequencerView ();
 
-AbstractSequencerView.prototype.changeScrollPosition = function (value)
+BaseSequencerView.prototype.changeScrollPosition = function (value)
 {
     var isInc = value >= 65;
     if (isInc)
@@ -43,14 +31,9 @@ AbstractSequencerView.prototype.changeScrollPosition = function (value)
     }
 };
 
-AbstractSequencerView.prototype.changeResolution = function (value)
+BaseSequencerView.prototype.changeResolution = function (value)
 {
     var isInc = value >= 65;
     this.selectedIndex = Math.max (0, (Math.min (this.resolutions.length - 1, isInc ? (this.selectedIndex + 1) : (this.selectedIndex - 1))));
     this.clip.setStepLength (this.resolutions[this.selectedIndex]);
-};
-
-AbstractSequencerView.prototype.isInXRange = function (x)
-{
-    return x >= this.offsetX && x < this.offsetX + this.clip.getStepSize ();
 };

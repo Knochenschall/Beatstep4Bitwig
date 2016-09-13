@@ -11,11 +11,10 @@ var VIEW_SESSION   = 5;
 var VIEW_BROWSER   = 6;
 var VIEW_SHIFT     = 7;
 
-load ("BaseView.js");
 load ("TrackView.js");
 load ("DeviceView.js");
 load ("PlayView.js");
-load ("AbstractSequencerView.js");
+load ("BaseSequencerView.js");
 load ("DrumView.js");
 load ("SequencerView.js");
 load ("SessionView.js");

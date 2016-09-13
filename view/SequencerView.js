@@ -7,7 +7,8 @@ SequencerView.START_KEY        = 36;
 
 function SequencerView (model)
 {
-    AbstractSequencerView.call (this, model, "Sequencer", 128, SequencerView.NUM_DISPLAY_COLS);
+    BaseSequencerView.call (this, model, 128, SequencerView.NUM_DISPLAY_COLS);
+    this.name = "Sequencer";
 
     this.offsetY = SequencerView.START_KEY;
     this.selectedPad = 0;
@@ -32,7 +33,7 @@ function SequencerView (model)
         this.clearPressedKeys ();
     }));
 }
-SequencerView.prototype = new AbstractSequencerView ();
+SequencerView.prototype = new BaseSequencerView ();
 
 //--------------------------------------
 // Knobs
