@@ -13,7 +13,7 @@ load ("Controller.js");
 // This is the only global variable, do not use it.
 var controller = null;
 
-host.defineController ("Arturia", "Beatstep4Bitwig", "2.03", "F7FF1750-7EC3-11E4-B4A9-0800200C9A66", "Jürgen Moßgraber");
+host.defineController ("Arturia", "Beatstep4Bitwig", "2.04", "F7FF1750-7EC3-11E4-B4A9-0800200C9A66", "Jürgen Moßgraber");
 host.defineMidiPorts (1, 1);
 
 host.defineSysexIdentityReply ("F0 7E 00 06 02 00 20 6B 02 00 06 00 ?? ?? ?? ?? F7");
