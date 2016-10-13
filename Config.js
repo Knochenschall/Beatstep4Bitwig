@@ -17,11 +17,6 @@ Config.maxParameterValue = 128;
 // Editable configurations
 // ------------------------------
 
-Config.SCALES_SCALE  = 0;
-Config.SCALES_BASE   = 1;
-Config.SCALES_IN_KEY = 2;
-Config.SCALES_LAYOUT = 3;
-
 Config.initListeners (Config.SCALES_LAYOUT);
 
 Config.init = function ()
