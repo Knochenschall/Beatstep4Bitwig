@@ -109,15 +109,9 @@ Controller.prototype.updateIndication = function (viewID)
     }
 };
 
-function changeValue (control, value, fractionValue, maxParameterValue, minParameterValue)
+function calcKnobSpeed (control, fractionValue)
 {
-    if (typeof (minParameterValue) == 'undefined')
-        minParameterValue = 0;
-    var isInc = control >= 65;
-    if (control == 64)
-        return value;
-    var speed = Math.max ((isInc ? control - 65 : Math.abs (63 - control)) * fractionValue, fractionValue);
-    return isInc ? Math.min (value + speed, maxParameterValue - 1) : Math.max (value - speed, minParameterValue);
+    return (control >= 65 ? control - 64 : control - 64) * fractionValue;
 }
 
 Scales.DRUM_NOTE_END = 52;
