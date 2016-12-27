@@ -121,7 +121,7 @@ TrackView.prototype.onGridNote = function (note, velocity)
             
         default:
             var track = note - 36 - 8;
-            tb.select (track);
+            this.selectTrack (track);
             break;
     }
 };
